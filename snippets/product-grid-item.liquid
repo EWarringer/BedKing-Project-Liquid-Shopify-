@@ -1,0 +1,53 @@
+{% unless grid_item_width %}
+  {% assign grid_item_width = 'large--one-third medium--one-half' %}
+{% endunless %}
+
+{% assign on_sale = false %}
+{% if product.compare_at_price > product.price %}
+  {% assign on_sale = true %}
+{% endif %}
+
+{% assign sold_out = true %}
+{% if product.available  %}
+  {% assign sold_out = false %}
+{% endif %}
+
+<div class="grid-item {{ grid_item_width }}{% if sold_out %} sold-out{% endif %}{% if on_sale %} on-sale{% endif %}">
+
+  <a href="{{ product.url | within: collection }}" class="product-grid-item text-center">
+    <div class="product-grid-image">
+      <div class="product-grid-image--centered">
+        {% if on_sale %}
+          <div class="badge badge--sale"><span class="badge-label">{{ 'products.product.on_sale' | t }}</span></div>
+        {% endif %}
+        {% if sold_out %}
+          <div class="badge badge--sold-out"><span class="badge-label">{{ 'products.product.sold_out' | t }}</span></div>
+        {% endif %}
+        <img src="{{ product.featured_image.src | img_url: 'large' }}" alt="{{ product.featured_image.alt | escape }}">
+      </div>
+    </div>
+
+    {% if settings.collection_title_enable or settings.collection_price_enable %}
+      <p>
+        {% if settings.collection_title_enable %}
+          <span class="h6 color-secondary">{{ product.title }}</span><br>
+        {% endif %}
+        {% if settings.collection_price_enable %}
+          {% capture price %}{% include 'price' with product.price %}{% endcapture %}
+          {% if product.price_varies %}
+            {{ 'products.general.from_text_html' | t: price: price }}
+          {% else %}
+            {{ price }}
+          {% endif %}
+          {% if on_sale %}
+            <s class="product-grid-item__sale-price">
+              <span class="visually-hidden">{{ 'products.general.regular_price' | t }}</span>
+              {{ product.compare_at_price | money }}
+            </s>
+          {% endif %}
+        {% endif %}
+      </p>
+    {% endif %}
+  </a>
+
+</div>

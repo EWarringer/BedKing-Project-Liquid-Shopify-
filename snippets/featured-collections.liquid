@@ -1,0 +1,107 @@
+<div class="section-header text-center">
+  <h3 class="section-header--title">{{ 'home_page.sections.featured_title' | t }}</h3>
+</div>
+
+<div class="grid-uniform text-center collection-grid">
+
+  {% assign index = 0 %}
+  {% assign limit = 6 %}
+  {% assign query = limit | plus: 2 %}
+
+  {% if settings.home_featured_collections_sort == 'manual' %}
+    {% for i in (1..6) %}
+      {% assign collection_setting = 'collection_' | append:i %}
+      {% unless settings[collection_setting] == blank %}
+        {% assign index = index | plus: 1 %}
+      {% endunless %}
+    {% endfor %}
+  {% else %}
+    {% for collection in collections limit: query %}
+      {% unless index >= limit %}
+        {% unless collection.handle == 'frontpage' or collection.handle == 'all' %}
+          {% assign index = index | plus: 1 %}
+        {% endunless %}
+      {% endunless %}
+    {% endfor %}
+  {% endif %}
+
+  {% case index %}
+    {% when 1 %}
+      {% assign featured_collection_width = 'one-half' %}
+      {% assign featured_collection_size = 'large' %}
+    {% when 2 %}
+      {% assign featured_collection_width = 'one-half' %}
+      {% assign featured_collection_size = 'large' %}
+    {% when 3 %}
+      {% assign featured_collection_width = 'small--one-half one-third' %}
+      {% assign featured_collection_size = 'large' %}
+    {% when 4 %}
+      {% assign featured_collection_width = 'small--one-half one-quarter' %}
+    {% when 5 %}
+      {% assign featured_collection_width = 'small--one-half medium--one-third large--one-fifth' %}
+    {% when 6 %}
+      {% assign featured_collection_width = 'small--one-half medium--one-third large--one-sixth' %}
+    {% when 7 %}
+      {% assign featured_collection_width = 'small--one-half one-quarter' %}
+    {% when 8 %}
+      {% assign featured_collection_width = 'small--one-half one-quarter' %}
+    {% when 9 %}
+      {% assign featured_collection_width = 'small--one-half one-third' %}
+      {% assign featured_collection_size = 'large' %}
+    {% else %}
+      {% assign featured_collection_width = 'small--one-half one-quarter' %}
+  {% endcase %}
+
+  {% if settings.home_featured_collections_sort == 'manual' %}
+    {% for i in (1..6)  %}
+      {% assign collection_setting = 'collection_' | append: i %}
+      {% if settings[collection_setting] != blank %}
+        {% assign featured = settings[collection_setting] %}
+        {% include 'featured-collection' %}
+      {% endif %}
+    {% endfor %}
+  {% else %}
+    {% assign index = 0 %}
+    {% for collection in collections limit: query %}
+      {% unless index >= limit %}
+        {% unless collection.handle == 'frontpage' or collection.handle == 'all' %}
+          {% assign index = index | plus: 1 %}
+          {% assign featured = collection.handle %}
+          {% include 'featured-collection' %}
+        {% endunless %}
+      {% endunless %}
+    {% endfor %}
+  {% endif %}
+
+  {% if index == 0 %}
+    {% unless emptyState %}
+      {{ 'theme-onboarding.css' | global_asset_url | stylesheet_tag }}
+      {% assign emptyState = true %}
+    {% endunless %}
+
+    <div class="grid-item">
+      <div class="helper-section">
+        <div class="helper-note">
+          <span class="helper-icon"></span>
+          <h3>{{ 'home_page.onboarding.modal_title' | t }}</h3>
+          <p>{{ 'home_page.onboarding.no_collections_html' | t }}</p>
+          <p><a class="admin-btn-primary" href="/admin/collections">{{ 'home_page.onboarding.add_collection' | t }}</a></p>
+        </div>
+
+        <div class="grid-uniform helper-content">
+          {% for i in (1..6) %}
+            <div class="grid-item small--one-half medium--one-third large--one-sixth">
+              <a href="#" class="featured-box">
+                <div class="featured-box--image">
+                  {% capture imageUrl %}//cdn.shopify.com/s/images/themes/product-{{ i }}.png{% endcapture %}
+                  {{ imageUrl | img_tag }}
+                </div>
+                <span class="featured-box--title">{{ 'home_page.onboarding.collection_title' | t }}</span>
+              </a>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  {% endif %}
+</div>

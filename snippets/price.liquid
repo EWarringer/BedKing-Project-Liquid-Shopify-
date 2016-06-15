@@ -1,0 +1,9 @@
+{% if shop.money_format == '${{amount}}' %}
+  {% assign formatted_price = price | money | replace: '.00','' %}
+{% elsif shop.money_format == '${{amount_with_comma_separator}}' %}
+  {% assign formatted_price = price | money | replace: ',00','' %}
+{% else %}
+  {% assign formatted_price = price | money %}
+{% endif %}
+
+{{ formatted_price }}
