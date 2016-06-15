@@ -60,14 +60,11 @@
 {% endcomment %}
 <body class="{% if customer %}customer-logged-in {% endif %}template-{{ template | replace: '.', ' ' | truncatewords: 1, '' | handle }}" >
 
-  {% if settings.header_gap_enable %}
-    <div class="header-gap"></div>
-  {% endif %}
 
   <div class="wrapper site-wrapper">
 
     <header class="site-header"  role="banner">
-
+      <div class="grid--full">
         {% if settings.logo_position == 'center' %}
           <div class="grid-item large--one-third small--hide"></div>
         {% endif %}
@@ -92,10 +89,9 @@
           {% endif %}
         </div>
 
-      <div class="grid--full">
-        <nav class="nav-bar grid-item large--one-half" id="stickyNav" role="navigation">
+        <nav class="nav-bar grid-item large--two-thirds" id="stickyNav" role="navigation">
       	  <div class="grid--full">
-            <div class="grid-item{% if shop.customer_accounts_enabled %} large--one-half text-left{% else %} text-center{% endif %}">
+            <div class="grid-item{% if shop.customer_accounts_enabled %} large--one-half text-left{% else %} text-left{% endif %}">
               {% include 'site-nav' %}
             </div>
             {% if shop.customer_accounts_enabled %}
@@ -161,13 +157,29 @@
           {% endif %}
         </div>
       </div>
+      <div class="shadow"></div>
     </header>
 
+    {% if settings.header_gap_enable %}
+    	<div class="header-gap"></div>
+  	{% endif %}
+
     <main class="main-content" role="main">
-      {% unless template == 'index' %}
+
+      <div class="home-page"><img src="{{ 'background-bed.jpg' | asset_url }}" alt="Bed King" class="home-background"></div>
+
+      <h2 class="bruce-title">BRUCE THE BED KING'S ON-LINE STORE</h2>
+
+      <div class="p-wrap">
+        <p class="paragraph">Since 1954 Bruce the Bed King has sold mattresses from our landmark location in Hackensack, N.J.</p>
+        <p class="paragraph">We are offering that same great service and value to our online customers. Our current product line is the MLily Harmony 10 inch and MLily Premier 7 inch Memory Foam Mattresses.  These are two fantastic mattresses that are excellent values at these prices.</p>
+      </div>
+
+<!--       {% unless template == 'index' %}
         <hr class="hr--header">
       {% endunless %}
-      {{ content_for_layout }}
+      {{ content_for_layout }} -->
+
     </main>
 
     <hr>
