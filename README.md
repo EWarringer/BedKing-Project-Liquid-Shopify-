@@ -1,1 +1,1 @@
-# BedKing-Project-Liquid-Shopify-
+# BedKing-Project-LiquidShopify
