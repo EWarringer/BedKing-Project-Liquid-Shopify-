@@ -727,10 +727,10 @@ body {
   @include clearfix();
   max-width: 100%;
   margin: 0 auto;
-  padding: 0 25px;
+  padding: 0;
 
   @include at-query ($min, $small) {
-    padding: 0 55px;
+    padding: 0;
   }
 }
 
@@ -2069,7 +2069,8 @@ $shareBorderColor: #ececec;
   padding: ($gutter / 2) 0;
 
   @include at-query ($min, $large) {
-    padding: ($gutter * 1.5) 0 $gutter;
+    padding: 0;
+    height: 80px;
 
     .grid {
       display: table;
@@ -2109,6 +2110,8 @@ $shareBorderColor: #ececec;
 
 .header-logo {
   display: inline-block;
+  width: 180px;
+  padding: 5px 0 0 15px;
   margin: 0;
   max-width: {{ settings.logo_max_width }}px;
 
