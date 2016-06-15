@@ -66,8 +66,7 @@
 
   <div class="wrapper site-wrapper">
 
-    <header class="site-header" role="banner">
-      <div class="grid--full">
+    <header class="site-header"  role="banner">
 
         {% if settings.logo_position == 'center' %}
           <div class="grid-item large--one-third small--hide"></div>
@@ -93,9 +92,10 @@
           {% endif %}
         </div>
 
-        <nav class="nav-bar grid-item large--two-thirds" id="stickyNav" role="navigation">
+      <div class="grid--full">
+        <nav class="nav-bar grid-item large--one-half" id="stickyNav" role="navigation">
       	  <div class="grid--full">
-            <div class="grid-item{% if shop.customer_accounts_enabled %} large--one-half{% else %} text-center{% endif %}">
+            <div class="grid-item{% if shop.customer_accounts_enabled %} large--one-half text-left{% else %} text-center{% endif %}">
               {% include 'site-nav' %}
             </div>
             {% if shop.customer_accounts_enabled %}
@@ -162,7 +162,6 @@
         </div>
       </div>
     </header>
-
 
     <main class="main-content" role="main">
       {% unless template == 'index' %}
