@@ -1,15 +1,9 @@
 <!doctype html>
-
 <!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
-
 <!--[if IE 7]><html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
-
 <!--[if IE 8]><html class="no-js lt-ie9" lang="en"> <![endif]-->
-
 <!--[if IE 9 ]><html class="ie9 no-js"> <![endif]-->
-
 <!--[if (gt IE 9)|!(IE)]><!--> <html class="no-js"> <!--<![endif]-->
-
 <head>
 
   <!-- Basic page needs ================================================== -->
@@ -64,7 +58,6 @@
 {% comment %}
   Add the page template as a class for easy page or template specific styling.
 {% endcomment %}
-
 <body class="{% if customer %}customer-logged-in {% endif %}template-{{ template | replace: '.', ' ' | truncatewords: 1, '' | handle }}" >
 
 
@@ -164,29 +157,18 @@
           {% endif %}
         </div>
       </div>
-      <div class="shadow"></div>
     </header>
 
     {% if settings.header_gap_enable %}
     	<div class="header-gap"></div>
   	{% endif %}
 
-    <main class="main-content" role="main">
 
-      <div class="home-page"><img src="{{ 'background-bed.jpg' | asset_url }}" alt="Bed King" class="home-background"></div>
-
-      <h2 class="bruce-title">BRUCE THE BED KING'S ON-LINE STORE</h2>
-
-      <div class="p-wrap">
-        <p class="paragraph">Since 1954 Bruce the Bed King has sold mattresses from our landmark location in Hackensack, N.J.</p>
-        <p class="paragraph">We are offering that same great service and value to our online customers. Our current product line is the MLily Harmony 10 inch and MLily Premier 7 inch Memory Foam Mattresses.  These are two fantastic mattresses that are excellent values at these prices.</p>
-      </div>
-
+	<main class="main-content" role="main">
       {% unless template == 'index' %}
         <hr class="hr--header">
       {% endunless %}
       {{ content_for_layout }}
-
     </main>
 
     <hr>

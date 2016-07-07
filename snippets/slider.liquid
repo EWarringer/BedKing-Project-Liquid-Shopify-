@@ -1,20 +1,10 @@
-<div class="flexslider">
-  <ul class="slides">
+<div class="home-page"><img src="{{ 'background-bed.jpg' | asset_url }}" alt="Bed King" class="home-background"></div>
 
-    {% for i in (1..6) %}
-      {% capture slide %}slide_{{ i }}{% endcapture %}
-      {% capture slide_link %}slide_{{ i }}_link{% endcapture %}
-      {% capture slide_img %}slide_{{ i }}.jpg{% endcapture %}
-      {% capture slide_alt %}slide_{{ i }}_alt.jpg{% endcapture %}
-      {% if settings[slide] %}
-        <li>
-          <a href="{{ settings[slide_link] }}" class="slide-link">
-            {{ slide_img | asset_url | img_tag: slide_alt }}
-          </a>
-        </li>
-      {% endif %}
-    {% endfor %}
-  </ul>
-</div>
+      <h2 class="bruce-title">BRUCE THE BED KING'S ON-LINE STORE</h2>
+
+      <div class="p-wrap">
+        <p class="paragraph">Since 1954 Bruce the Bed King has sold mattresses from our landmark location in Hackensack, N.J.</p>
+        <p class="paragraph">We are offering that same great service and value to our online customers. Our current product line is the MLily Harmony 10 inch and MLily Premier 7 inch Memory Foam Mattresses.  These are two fantastic mattresses that are excellent values at these prices.</p>
+      </div>
 
 {{ 'jquery.flexslider.min.js' | asset_url | script_tag }}
